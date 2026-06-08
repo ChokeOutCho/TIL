@@ -30,7 +30,7 @@ for dir in posts/*/; do
     cat <<EOF > "$readme_path"
 # 📂 $dir_name
 
-[⬅️ 전체 목록으로 돌아가기](../README.md)
+[⬅️ 전체 목록으로 돌아가기](../../README.md)
 
 ---
 
