@@ -1,5 +1,5 @@
 
-# 📚 학습 일지 목차
+# 📚 학습 일지
 ### 📂 [C++](posts/C++/)
 - [optional](posts/C++/optional.md)
 - [FundamentalC++](posts/C++/FundamentalC++.md)
