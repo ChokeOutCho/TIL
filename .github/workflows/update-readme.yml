@@ -1,18 +1,19 @@
-#!/bin/bash
-echo "DEBUG: Checking posts folder..."
-find posts -maxdepth 2 -name "*.md"
+name: Update README
 
 on: [push]
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-    permissions: contents: write
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - run: |
           chmod +x scripts/generate_readme.sh
           ./scripts/generate_readme.sh
           git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
           git commit -m "docs: auto-update readme" || exit 0
           git push
