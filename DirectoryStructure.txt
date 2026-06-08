@@ -1,0 +1,10 @@
+/
+├── .github/workflows/    # 자동화 스크립트가 실행될 설정 파일
+├── posts/                # 학습 기록이 들어갈 메인 공간
+│   ├── C++/              # 카테고리 1
+│   │   └── vector.md
+│   └── TCP/              # 카테고리 2
+│       └── socket.md
+├── scripts/              # 자동 생성용 쉘 스크립트
+│   └── generate_readme.sh
+└── README.md             # 리포지토리의 대문 (자동 업데이트됨)
