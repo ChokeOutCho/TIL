@@ -4,7 +4,7 @@ cd "$GITHUB_WORKSPACE"
 # 1. 최상위 README 업데이트
 sed -n '//q;p' README.md > README.tmp
 echo "" >> README.tmp
-echo "# 📚 학습 일지 목차" >> README.tmp
+echo "# 📚 학습 일지" >> README.tmp
 
 for dir in posts/*/; do
     [ -d "$dir" ] || continue
@@ -28,9 +28,13 @@ for dir in posts/*/; do
     readme_path="${dir}README.md"
     
     cat <<EOF > "$readme_path"
-# 📂 $dir_name 학습 정리
+# 📂 $dir_name
 
-## 📝 전체 목록
+[⬅️ 전체 목록으로 돌아가기](../../README.md)
+
+---
+
+## 목록
 EOF
     # 하위 README는 전체 목록을 보여줌 (확장자 제거)
     find "$dir" -maxdepth 1 -name "*.md" ! -name "README.md" | while read -r file; do
