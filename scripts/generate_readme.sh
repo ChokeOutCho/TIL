@@ -18,12 +18,23 @@ for dir in posts/*/; do
     dir_name=$(basename "$dir")
     readme_path="${dir}README.md"
     
-    echo "# 📂 $dir_name 학습 정리" > "$readme_path"
-    echo "" >> "$readme_path"
-    echo "## 📝 목록" >> "$readme_path"
-    echo "| 제목 | 링크 |" >> "$readme_path"
-    echo "| --- | --- |" >> "$readme_path"
+    # --- 템플릿 부분 시작 ---
+    cat <<EOF > "$readme_path"
+# 📂 $dir_name 학습 정리
+
+이 폴더는 **$dir_name**에 관한 학습 기록과 실습 내용을 담고 있습니다.
+
+## 🎯 학습 목표
+- [ ] 
+- [ ] 
+
+## 📝 학습 리스트
+| 제목 | 링크 |
+| --- | --- |
+EOF
+    # --- 템플릿 부분 끝 ---
     
+    # 파일 목록 추가
     for file in "$dir"/*.md; do
         filename=$(basename "$file")
         if [ "$filename" != "README.md" ]; then
