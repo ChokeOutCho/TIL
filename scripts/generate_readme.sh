@@ -30,15 +30,17 @@ for dir in posts/*/; do
     cat <<EOF > "$readme_path"
 # 📂 $dir_name
 
-[⬅️ 전체 목록으로 돌아가기](../../README.md)
+[⬅️ 전체 목록으로 돌아가기](../README.md)
 
 ---
 
 ## 목록
 EOF
-    # 하위 README는 전체 목록을 보여줌 (확장자 제거)
+
+    # 수정된 부분: $(basename "$file")을 사용하여 경로를 제거하고 파일명만 추출
     find "$dir" -maxdepth 1 -name "*.md" ! -name "README.md" | while read -r file; do
         filename=$(basename "$file" .md)
-        echo "- [$filename]($file)" >> "$readme_path"
+        just_filename=$(basename "$file") 
+        echo "- [$filename]($just_filename)" >> "$readme_path"
     done
 done
