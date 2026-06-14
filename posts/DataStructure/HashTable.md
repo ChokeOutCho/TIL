@@ -29,4 +29,64 @@
 * 1 체이닝: 같은 주소에 데이터를 여러 개 저장할 수 있도록 연결 리스트를 사용. 그러나 이 경우에는 검색 속도가 O(1)이 아니게 되겠음.
 * 2 개방 주소법(Open Addressing): 충돌이 나면 비어 있는 다른 주소를 찾아 데이터 삽입. (예: 바로 다음 칸을 확인하는 ‘선형 탐색’)
 
-[chaining](../../imgs/HashTable-Chaining.png)
+![chaining](../../imgs/HashTable-Chaining.png)
+
+```cpp
+template <class T>
+class HashMap
+{
+private:
+	struct Node
+	{
+		std::string key;
+		T value;
+	};
+
+	const int HashFunction(const std::string key) const
+	{
+		long hash = 0;
+		for (char c : key)
+		{
+			hash += (hash * 16)+c;
+		}
+		return hash % m_size;
+	}
+
+	mutable size_t m_size;
+	mutable std::vector<std::list<Node>> m_table; // 필요하다면 자동 확장하도록
+public:
+	explicit HashMap(size_t size)
+		: m_size(size), m_table(size)
+	{
+
+	}
+	~HashMap() {}
+
+	int Get(std::string key, T& out) const
+	{
+		int idx = HashFunction(key);
+		for (Node& node : m_table[idx])
+		{
+			if (node.key == key)
+			{
+				out = node.value;
+				return 1;
+			}
+		}
+		return -1;
+	}
+
+	int Insert(std::string key, int value)
+	{
+		int idx = HashFunction(key);
+		for (Node& node : m_table[idx])
+		{
+			if (node.key == key)
+				return -1;
+		}
+		m_table[idx].push_back({key, value});
+		return 1;
+	}
+
+};
+```
