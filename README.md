@@ -7,6 +7,7 @@
 - [EffectiveC++_2026-06-05](posts/C++/EffectiveC++_2026-06-05.md)
 
 ### 📂 [DataStructure](posts/DataStructure/)
+- [Tree](posts/DataStructure/Tree.md)
 - [HashTable](posts/DataStructure/HashTable.md)
 
 ### 📂 [Network](posts/Network/)

@@ -5,4 +5,5 @@
 ---
 
 ## 목록
+- [Tree](Tree.md)
 - [HashTable](HashTable.md)
