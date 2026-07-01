@@ -29,12 +29,12 @@
 
 ### 5. 활용처:
 * 파일 시스템
-* DB
-* 당장 내 프로젝트들에도 속도가 중요한 다양한 곳에서 쓰고있음..
+* DB(비트리)
+* 당장 내 프로젝트들에도 속도가 중요한 다양한 곳에서 쓰고있음.. (RB트리 위주)
 <br><br><br>
 
 # 이진 검색 트리
-
+이제 지울때 BST를 유지해야한다. 지운
 ```cpp
 // 트리 노드 구조체
 struct Node {
@@ -50,7 +50,6 @@ struct Node {
 class BinarySearchTree {
 private:
     Node* root;
-
     Node* insert(Node* node, int val) {
         if (node == nullptr) return new Node(val);
         if (val < node->data) node->left = insert(node->left, val);
