@@ -3,10 +3,12 @@
 ### 📂 [C++](posts/C++/)
 - [optional](posts/C++/optional.md)
 - [move](posts/C++/move.md)
+- [constexpr](posts/C++/constexpr.md)
 - [FundamentalC++](posts/C++/FundamentalC++.md)
 - [EffectiveC++_2026-06-05](posts/C++/EffectiveC++_2026-06-05.md)
 
 ### 📂 [DataStructure](posts/DataStructure/)
+- [vector](posts/DataStructure/vector.md)
 - [Tree](posts/DataStructure/Tree.md)
 - [HashTable](posts/DataStructure/HashTable.md)
 
