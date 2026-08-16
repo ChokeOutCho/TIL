@@ -9,7 +9,7 @@
 
 ### 📂 [DataStructure](posts/DataStructure/)
 - [vector](posts/DataStructure/vector.md)
-- [Tree](posts/DataStructure/Tree.md)
+- [PriorityQueue](posts/DataStructure/PriorityQueue.md)
 - [HashTable](posts/DataStructure/HashTable.md)
 
 ### 📂 [Network](posts/Network/)
