@@ -20,10 +20,16 @@
 우선순위 큐 구현에 사용할 힙은 **배열**로 만들 예정이다. 노드 기반으로도 만들 수는 있지만 연속적인 메모리에서 부모랑 스왑 하는 방법으로 최대 최소 값을 맞추고 루트만 뽑아 쓰는 용도로 사용하겠다.
 
 ```cpp
+/*
+    템플릿이라서 대소관계 기준이 모호한 객체는 비교연산들을 오버로딩해야 쓸 수 있음.
+    
+    템플릿에서 반환값 결정을 못하겠음;; 실패했을 때 throw를 하고 싶진 않은데 -1 반환도 불가능함; 그래서 bool로 반환하고 top과 pop을 분리하나봄.
+*/
 #include <iostream>
 
 template <class T, size_t MAX_SIZE>
-class MaxHeap {
+class MaxHeap 
+{
 private:
     T heap[MAX_SIZE];
     size_t size = 0;
@@ -40,7 +46,8 @@ private:
 
 public:
 
-    const T& top() const {
+    const T& top() const 
+    {
         if (size == 0) throw std::out_of_range("Heap is empty");
         return heap[0];
     }
