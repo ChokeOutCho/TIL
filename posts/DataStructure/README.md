@@ -5,6 +5,6 @@
 ---
 
 ## 목록
+- [PriorityQueue](PriorityQueue.md)
 - [vector](vector.md)
 - [HashTable](HashTable.md)
-- [Tree](Tree.md)
