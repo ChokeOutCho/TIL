@@ -18,6 +18,7 @@
 ### 📂 [Portfolio](posts/Portfolio/)
 
 ### 📂 [Unsorted](posts/Unsorted/)
+- [부동소수점](posts/Unsorted/부동소수점.md)
 - [2025-3분기-멀티스레드_2025-06](posts/Unsorted/2025-3분기-멀티스레드_2025-06.md)
 - [2025-2분기-네트워크-및-winsock_2025-04](posts/Unsorted/2025-2분기-네트워크-및-winsock_2025-04.md)
 - [2025-1분기-C++-및-기타OS_2025-01](posts/Unsorted/2025-1분기-C++-및-기타OS_2025-01.md)
