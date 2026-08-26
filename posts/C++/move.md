@@ -1,6 +1,14 @@
 # std::move
-메모리 복사가 일어나는 것이 아니라 객체를 RValue로 취급한다. (곧 사라짐. 임시 객체)
-`std::move`가 호출되면 복사가 아니라 **이동 생성자**가 호출 된다.
+사실 `std::move`자체는 RValue로의 `static_cast`이다.
+```cpp
+template <typename T>
+constexpr typename std::remove_reference<T>::type&& move(T&& arg) noexcept {
+    // 전달받은 인자를 오른값 참조(Rvalue Reference)로 강제 캐스팅해서 반환
+    return static_cast<typename std::remove_reference<T>::type&&>(arg);
+}
+```
+
+`std::move`가 호출되면 복사가 아니라 **이동 함수**를 호출 한다. **대응하는 이동 함수가 없으면 복사 함수를 호출**한다.
 
 ## 1. 개념
 
@@ -14,7 +22,7 @@
 때문에 사용자 정의 객체가 **이동**이 가능할 예정이라면 이동 생성자를 잘 구현해야겠다. 
 
 ## 2. 주의사항
-* 1) 이동 후 원본은 빈 껍데기가 된다. 호출 이후 접근해선 안된다.
+* 1) 이동 후 원본은 빈 껍데기가 된다. 호출 이후 접근해선 안된다. (이동함수에서 그렇게 만들거다.)
 * 2) 이동 생성자와 이동 대입 연산자가 존재해야 한다.
 * 3) 남용하면 컴파일 최적화를 방해할 수 있다. (이동생성자 호출을 없앨수도 있었음)
 
@@ -25,3 +33,33 @@
 * 이동 대입 연산자
 * 소멸자
 
+## 4. 이동 대입 연산자 국룰
+* 1. 자기 대입 방어
+* 2. 멤버 복사
+* 3. 기존 자원 무효화
+* 4. 자기 참조 반환
+>> stl쓸거면 noexcept로 선언
+```cpp
+class Packet{
+    private:
+    char* buffer;
+    size_t size;
+
+    // &&는 오른값 참조
+    public:
+    Packet& operator=(Packet&& other) noexcept{
+        // 1. 자기 대입 방어
+        if(this == &other){
+            return *this;
+        }
+        // 2. 멤버 복사
+        buffer = other.buffer;
+        size = other.size;
+        // 3. 기존 자원 무효화
+        other.buffer = nullptr;
+        size = -1;
+        // 4. 자기 참조 반환
+        return *this; // 연속 대입 되게 하려고 자기 참조 반환
+    }
+}
+```
