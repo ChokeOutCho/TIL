@@ -3,7 +3,7 @@
 ```cpp
 template <typename T>
 constexpr typename std::remove_reference<T>::type&& move(T&& arg) noexcept {
-    // 전달받은 인자를 오른값 참조(Rvalue Reference)로 강제 캐스팅해서 반환
+    // 전달받은 인자를 오른값 참조(Rvalue Reference, &&)로 강제 캐스팅해서 반환
     return static_cast<typename std::remove_reference<T>::type&&>(arg);
 }
 ```
