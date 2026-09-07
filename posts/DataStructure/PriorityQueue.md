@@ -23,105 +23,114 @@
 /*
     템플릿이라서 대소관계 기준이 모호한 객체는 비교연산들을 오버로딩해야 쓸 수 있음.
     
-    템플릿에서 반환값 결정을 못하겠음;; 실패했을 때 throw를 하고 싶진 않은데 -1 반환도 불가능함; 그래서 bool로 반환하고 top과 pop을 분리하나봄.
+    템플릿에서 반환값 결정을 못하겠음;; 실패했을 때 throw를 하고 싶진 않음; 
+    그래서 반환값은 성공 실패 여부로 하고 [out]인자로 결과를 주는게 좋을듯.
 */
 #include <iostream>
 
-template <class T, size_t MAX_SIZE>
-class MaxHeap 
+template <class T>
+class PriorityQueue
 {
 private:
-    T heap[MAX_SIZE];
-    size_t size = 0;
-
-    size_t parent(size_t i) { return (i - 1) / 2; }
-    size_t leftChild(size_t i) { return 2 * i + 1; }
-    size_t rightChild(size_t i) { return 2 * i + 2; }
-    void nodeSwap(size_t a, size_t b)
-    {
-        T temp = heap[a];
-        heap[a] = heap[b];
-        heap[b] = temp;
-    }
-
+	size_t size;
+	size_t capacity;
+	T* arr;
 public:
+	explicit PriorityQueue(size_t capacity)
+	{
+		this->capacity = capacity;
+		arr = new T[capacity];
+		size = 0;
+	}
+	~PriorityQueue()
+	{
+		delete[] arr;
+	}
+	void push(T value)
+	{
+		if (capacity <= size) return;
+		int cur = size;
+		size++;
+		arr[cur] = value;
+		while (cur > 0)
+		{
+			// 지금은 최대힙
+			int p = parent(cur);
+			if (arr[p] >= arr[cur])
+				break;
 
-    const T& top() const 
-    {
-        if (size == 0) throw std::out_of_range("Heap is empty");
-        return heap[0];
-    }
+			swap(p, cur);
+			cur = p;
+		}
+	}
 
-    bool empty() const { return size == 0; }
-    size_t getSize() const { return size; }
+	T top() const
+	{
+		return arr[0];
+	}
 
-    int push(const T& value) 
-    {
-        if (size >= MAX_SIZE) 
-        {
-            return -1;
-        }
+	void pop()
+	{
+		if (size == 0) return;
 
-        size_t current = size;
-        heap[current] = value;
-        size++;
+		// 마지막 원소를 루트로 세팅하고 재정렬
+		// l과 r 비교하고 내 자리로 세팅.
+		arr[0] = arr[--size];
+		int cur = 0;
+		while (left(cur) < size)
+		{
+			int l = left(cur);
+			int r = right(cur);
+			int t = l;
+			// r < size: 오른쪽 자식이 존재한다.
+			if (r < size && arr[r] > arr[l])
+				t = r;
 
-        // 부모와 비교하고 스왑을 루트까지 반복
-        while (current > 0 && heap[current] > heap[parent(current)]) 
-        {
-            nodeSwap(current, parent(current));
-            current = parent(current);
-        }
-        return 0;
-    }
+			if (arr[cur] >= arr[t])
+				break;
 
-    int pop()
-    {
-        if (size == 0) return -1;
+			swap(cur, t);
+			cur = t;
+		}
+	}
+private:
+	int parent(int i) const
+	{
+		return (i - 1) / 2;
+	}
+	int left(int i) const
+	{
+		return (i * 2) + 1;
+	}
+	int right(int i) const
+	{
+		return (i * 2) + 2;
+	}
+	
 
-        // 맨 끝과 루트 교체하고 사이즈 감소
-        heap[0] = heap[size - 1];
-        size--;
-
-        size_t current = 0;
-
-        // 자식과 비교하며 내려가기
-        while (leftChild(current) < size)
-        {
-            size_t left = leftChild(current);
-            size_t right = rightChild(current);
-            size_t largest = current;
-
-            if (left < size && heap[left] > heap[largest])
-                largest = left;
-            if (right < size && heap[right] > heap[largest])
-                largest = right;
-
-            if (largest == current) break;
-
-            nodeSwap(current, largest);
-            current = largest;
-        }
-    }
+	void swap(int a, int b)
+	{
+		T temp = arr[a];
+		arr[a] = arr[b];
+		arr[b] = temp;
+	}
 };
 
 int main()
 {
-    // 최대 100개까지 담을 수 있는 정적 힙
-    MaxHeap<int, 100> maxHeap;
+	PriorityQueue<int> q(100);
+	q.push(30);
+	q.push(10);
+	q.push(50);
+	q.push(20);
+	q.push(40);
+	std::cout << "최댓값 (Top): " << q.top() << "\n"; // 50
 
-    maxHeap.push(30);
-    maxHeap.push(10);
-    maxHeap.push(50);
-    maxHeap.push(20);
-    maxHeap.push(40);
+	q.pop();
+	std::cout << "pop 후 최댓값 (Top): " << q.top() << "\n"; // 40
 
-    std::cout << "최댓값 (Top): " << maxHeap.top() << "\n"; // 50
-
-    maxHeap.pop();
-    std::cout << "pop 후 최댓값 (Top): " << maxHeap.top() << "\n"; // 40
-
-    return 0;
+	return 0;
 }
+
 
 ```
