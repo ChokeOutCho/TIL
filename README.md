@@ -8,8 +8,8 @@
 - [EffectiveC++_2026-06-05](posts/C++/EffectiveC++_2026-06-05.md)
 
 ### 📂 [DB](posts/DB/)
-- [테이블 설계, 키, 제약조건](posts/DB/테이블 설계, 키, 제약조건.md)
-- [SELECT 기본과 논리적 실행 순서](posts/DB/SELECT 기본과 논리적 실행 순서.md)
+- [테이블_설계_키_제약조건](posts/DB/테이블_설계_키_제약조건.md)
+- [SELECT_기본과_논리적_실행_순서](posts/DB/SELECT_기본과_논리적_실행_순서.md)
 
 ### 📂 [DataStructure](posts/DataStructure/)
 - [vector](posts/DataStructure/vector.md)
