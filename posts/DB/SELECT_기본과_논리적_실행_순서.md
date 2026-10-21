@@ -1,3 +1,15 @@
+## 목차
+- [목차](#목차)
+- [1. SELECT 기본 구조](#1-select-기본-구조)
+- [2. WHERE 조건](#2-where-조건)
+  - [AND/OR 우선순위](#andor-우선순위)
+- [3. 논리적 실행 순서](#3-논리적-실행-순서)
+  - [WHERE에서는 SELECT 별칭(as)을 못쓴다.](#where에서는-select-별칭as을-못쓴다)
+- [4. ORDER BY](#4-order-by)
+- [5. DISTINCT와 GROUP BY](#5-distinct와-group-by)
+- [6. SELECT \* 는 피하자](#6-select--는-피하자)
+
+
 ## 1. SELECT 기본 구조
 
 ```sql
