@@ -5,8 +5,8 @@
 ---
 
 ## 목록
+- [FundamentalC++](FundamentalC++.md)
+- [EffectiveC++_2026-06-05](EffectiveC++_2026-06-05.md)
 - [optional](optional.md)
 - [move](move.md)
-- [FundamentalC++](FundamentalC++.md)
 - [constexpr](constexpr.md)
-- [EffectiveC++_2026-06-05](EffectiveC++_2026-06-05.md)

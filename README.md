@@ -9,6 +9,7 @@
 
 ### 📂 [DB](posts/DB/)
 - [테이블_설계_키_제약조건](posts/DB/테이블_설계_키_제약조건.md)
+- [집계_GROUP_BY_HAVING](posts/DB/집계_GROUP_BY_HAVING.md)
 - [SELECT_기본과_논리적_실행_순서](posts/DB/SELECT_기본과_논리적_실행_순서.md)
 - [JOIN](posts/DB/JOIN.md)
 
